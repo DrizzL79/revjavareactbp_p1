@@ -42,17 +42,16 @@ public class RoleDAO implements RoleDAOInterface{
             WHILE there are results in the ResultNext (.next())...
             Make a new Role object.
              */
-            while(rs.next()){
+            if(rs.next()){
 
                 /*We need to use the data from the ResultSet to fill in a Role all-args constructor
                     Basically, we need to make a Role object from the data */
-                Role role = new Role(
-                        rs.getInt("role_id"),
-                        rs.getString("role_title")
-                );
                 //This is just a CONSTRUCTOR that we opened up for the sake of cleaner code
 
-                return role; //return the Role data to the user!!
+                return new Role(
+                        rs.getInt("role_id"),
+                        rs.getString("role_title")
+                ); //return the Role data to the user!!
             }
         } catch(SQLException e){
             e.printStackTrace(); //if something goes wrong, this will display an error message

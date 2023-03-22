@@ -30,11 +30,11 @@ public class EmployeeController {
 
             //this is just showing how to retrieve saved session attributes
             //realistically, you'd be putting these values into your DAOs
-            System.out.println(AuthController.ses.getAttribute("role_id"));
-            System.out.println(AuthController.ses.getAttribute("user_id"));
+            //System.out.println(AuthController.ses.getAttribute("role_id"));
+            //System.out.println(AuthController.ses.getAttribute("user_id"));
 
             //this is how you can get an int value for the session attributes
-            int i = (Integer)AuthController.ses.getAttribute("role_id");
+            //int i = (Integer)AuthController.ses.getAttribute("role_id");
 
             //We need an ArrayList of Employees, courtesy of our EmployeeDAO
             ArrayList<Employee> employees = eDAO.getEmployees();
@@ -73,18 +73,14 @@ public class EmployeeController {
         //With POST requests, we have JSON data coming in, which we can access with ctx.body();
         //body??? it refers to the BODY (aka the DATA) sent with the HTTP Request (in this case, employee)
         String body = ctx.body(); //we now have a Java String holding a JSON String
-
         //Instantiate a new GSON object to JSON <-> Java conversions
         Gson gson = new Gson();
-
         //turn the incoming JSON data (stored in the body String) into an Employee object
         Employee newEmp = gson.fromJson(body, Employee.class);
-
         /*we're calling the insert employees method from the EmployeeDAO
            if it's successful, we'll send the new employee back in the response with a 201 status code
            if it fails, we'll send an error message and a 406 status code
          */
-
         if(eDAO.insertEmployee(newEmp) != null){ //if insert was successful (which we set to return an Employee)
             ctx.status(201); //201 "created"
             ctx.result(body); //send back the employee

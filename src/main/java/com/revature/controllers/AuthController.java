@@ -39,7 +39,7 @@ public class AuthController {
 
             //we can use setAttribute() to set certain values to certain keys
             //THIS IS HOW WE CAN SAVE DATA IN A SESSION
-            ses.setAttribute("role_title", loggedInEmployee.getRole().getRole_title());
+           // ses.setAttribute("role_title", loggedInEmployee.getRole().getRole_title());
             ses.setAttribute("role_id_fk", loggedInEmployee.getRole_id_fk());
             ses.setAttribute("user_id", loggedInEmployee.getUser_id());
 

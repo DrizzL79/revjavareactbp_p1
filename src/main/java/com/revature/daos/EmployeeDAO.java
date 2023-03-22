@@ -29,7 +29,7 @@ public class EmployeeDAO implements EmployeeDAOInterface{
             ResultSet rs = s.executeQuery(sql);
 
             //Instantiate an empty ArrayList to hold our incoming Employee data (remember, Java can't read SQL)
-            ArrayList<Employee> employeeList = new ArrayList();
+            ArrayList<Employee> employeeList = new ArrayList<>();
 
             //use rs.next() in a while loop to create a new Employee for every incoming employee
             //rs.next() ITERATES through the incoming data. it will return false when there's no more data.
@@ -42,7 +42,7 @@ public class EmployeeDAO implements EmployeeDAOInterface{
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         null
-                        /*there is no JDBC method for getRole().. we'll add the Role object below*/
+                        /*there is no JDBC method for getRole(). we'll add the Role object below*/
                 );
 
                 //WOAH didn't we just make a method to get Roles by id? Yes!!!!

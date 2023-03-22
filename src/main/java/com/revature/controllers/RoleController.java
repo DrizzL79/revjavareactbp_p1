@@ -24,7 +24,7 @@ public class RoleController {
         //in Postman, no need to make a JSON object, we can just input the new salary int
 
         //if updateRoleSalary returns true...
-      /*  if(rDAO.updateRoleSalary(role_title)){
+      /*  if(rDAO.updateRoleSalary(role_title, salary)){
             ctx.status(202); //202 "accepted"
         } else {
             ctx.status(406); //406 "not acceptable"

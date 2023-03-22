@@ -119,11 +119,13 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employee_id=" + user_id +
-                "user_name ='" + user_name + '\'' +
+                "user_id=" + user_id +
+                ", user_name='" + user_name + '\'' +
+                ", password='" + password + '\'' +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
-                ", role=" + user_role +
+                ", user_role=" + user_role +
+                ", role_id_fk=" + role_id_fk +
                 '}';
     }
 }
