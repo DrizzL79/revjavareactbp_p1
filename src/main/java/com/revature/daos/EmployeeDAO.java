@@ -16,7 +16,7 @@ public class EmployeeDAO implements EmployeeDAOInterface{
         try(Connection conn = ConnectionUtil.getConnection()){
 
             //A String that will represent our SQL statement
-            String sql = "select * from employees;";
+            String sql = "select * from users;";
 
             /*
             No variables needed in the query above! no ?s
@@ -39,9 +39,11 @@ public class EmployeeDAO implements EmployeeDAOInterface{
                 Employee e = new Employee(
                         rs.getInt("user_id"),
                         rs.getString("user_name"),
+                        rs.getString("user_password"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
-                        null
+                        null,
+                        rs.getInt("role_id_fk")
                         /*there is no JDBC method for getRole(). we'll add the Role object below*/
                 );
 
@@ -82,7 +84,9 @@ public class EmployeeDAO implements EmployeeDAOInterface{
         try(Connection conn = ConnectionUtil.getConnection()){
 
             //we need to create our SQL string as usual
-            String sql = "insert into employees (user_name, password, first_name, last_name, role_id_fk) values (?, ?, ?, ?, ?);";
+            String sql = "insert into users (user_name, user_password, first_name, last_name, role_id_fk) values (?, " +
+                    "?, ?," +
+                    " ?, ?);";
 
             //Instantiate a PreparedStatement to hold our SQL and fill its variables
             PreparedStatement ps = conn.prepareStatement(sql);

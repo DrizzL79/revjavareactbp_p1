@@ -62,11 +62,11 @@ public class Launcher {
         /* app.get() is the Javalin method that takes in GET requests.
         In this case, it's calling to the getAllEmployeesHandler in the EmployeeController
         SO, when we send a request to localhost:3000/employees, the getEmployeesHandler will execute */
-        app.get("/employees", ec.getEmployeesHandler);
+        app.get("/users", ec.getEmployeesHandler);
 
         //app.post() is the Javalin method that takes in POST requests
         //why are we allowed to have two handlers that both take requests ending in /employees
-        app.post("/employees", ec.insertEmployee);
+        app.post("/users", ec.insertEmployee);
 
         //app.patch() is the Javalin method that takes in PATCH requests
         //{title}?? This is a PATH PARAMETER. The value that the user inputs after /roles/ will be stored.
