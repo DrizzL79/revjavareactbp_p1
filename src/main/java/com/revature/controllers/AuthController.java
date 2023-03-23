@@ -40,8 +40,9 @@ public class AuthController {
             //we can use setAttribute() to set certain values to certain keys
             //THIS IS HOW WE CAN SAVE DATA IN A SESSION
            // ses.setAttribute("role_title", loggedInEmployee.getRole().getRole_title());
-            ses.setAttribute("role_id_fk", loggedInEmployee.getRole_id_fk());
+            ses.setAttribute("role_id", loggedInEmployee.getRole().getRole_id());
             ses.setAttribute("user_id", loggedInEmployee.getUser_id());
+            ses.setAttribute("user_name", loggedInEmployee.getUser_name());
 
             //role id would be used to determine manager/employee, giving access to only certain methods
             //employee id would be used to get all reimbursements of the logged in employee

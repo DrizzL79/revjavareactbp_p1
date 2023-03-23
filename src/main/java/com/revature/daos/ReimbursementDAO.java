@@ -37,15 +37,15 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
     }
 
     @Override
-    public boolean updateReimbursementStatus(int reimb_status_id_fk, int id) {
+    public boolean updateReimbursementStatus(Reimbursement reimbursement) {
 
         try(Connection conn = ConnectionUtil.getConnection()){
 
             String sql = "update reimbursement set reimb_status_id_fk = ? where reimb_id = ?;";
 
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, reimb_status_id_fk);
-            ps.setInt(2, id);
+            ps.setInt(1, reimbursement.getReimb_status_id_fk());
+            ps.setInt(2, reimbursement.getReimb_id());
             ps.executeUpdate();
 
             return true;
@@ -79,10 +79,9 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
                );
 
                 ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
-                int statusIdFk =
-                        rs.getInt("reimb_status_id_fk");
-                ReimbursementStatus status = rsDAO.getReimbursementStatusbyID(statusIdFk);
-                r.setReimb_status(status);
+                ReimbursementStatus rStatus =
+                        rsDAO.getReimbursementStatusbyID(rs.getInt("reimb_status_id_fk"));
+                r.setReimb_status(rStatus);
 
                reimbursements.add(r);
             }
@@ -117,9 +116,9 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
                         null
                 );
                 ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
-                int statusIdFk =
-                        rs.getInt("reimb_status_id_fk");
-                ReimbursementStatus rStatus = rsDAO.getReimbursementStatusbyID(statusIdFk);
+
+                ReimbursementStatus rStatus =
+                        rsDAO.getReimbursementStatusbyID(rs.getInt("reimb_status_id_fk"));
                 r.setReimb_status(rStatus);
                 reimbursements.add(r);
             }

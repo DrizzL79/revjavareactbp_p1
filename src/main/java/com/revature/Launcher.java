@@ -74,6 +74,8 @@ public class Launcher {
 
         app.get("/reimbursements/pending", rc.getPendingReimbursementsHandler);
         app.post("/reimbursements/pending", rc.submitReimbursementHandler);
+        app.get("/reimbursements/employees/{user_name}", rc.getEmpReimbursementsHandler);
+        app.patch("/reimbursements/processed",rc.updateReimbursementsHandler);
         //this is the endpoint handler for login
         app.post("/login", ac.loginHandler);
 

@@ -27,9 +27,11 @@ public class AuthDAO {
                 Employee e = new Employee(
                         rs.getInt("user_id"),
                         rs.getString("user_name"),
+                        rs.getString("user_password"),
                         rs.getString("first_name"),
                         rs.getString("last_name"),
-                        null
+                        null,
+                        rs.getInt("role_id_fk")
                 );
 
                 int roleFk = rs.getInt("role_id_fk");

@@ -9,7 +9,7 @@ public interface ReimbursementDAOInterface {
 
     Reimbursement submitReimbursement(Reimbursement ticket);
 
-    boolean updateReimbursementStatus(int reimb_status_id_fk, int id);
+    boolean updateReimbursementStatus(Reimbursement reimbursement);
 
     ArrayList<Reimbursement> getAllReimbursementsEmp(String user_name_fk);
 

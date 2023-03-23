@@ -23,7 +23,7 @@ public class RoleDAO implements RoleDAOInterface{
              This String has a wildcard/parameter/variable for the role_id
              We have to take the user-inputted role id and put it into this statement somehow
               */
-            String sql = "select * from roles where role_id = ?;";
+            String sql = "select * from user_roles where role_id = ?;";
 
             //we need a PreparedStatement object to fill the variable in
             //PreparedStatements "prepare" a query to get sent to the DB

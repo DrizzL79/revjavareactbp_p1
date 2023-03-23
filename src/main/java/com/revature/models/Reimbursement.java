@@ -34,6 +34,11 @@ public class Reimbursement {
         this.reimb_status = reimb_status;
     }
 
+    public Reimbursement(int reimb_status_id_fk, int reimb_id) {
+        this.reimb_status_id_fk = reimb_status_id_fk;
+        this.reimb_id = reimb_id;
+    }
+
     public int getReimb_id() {
         return reimb_id;
     }
