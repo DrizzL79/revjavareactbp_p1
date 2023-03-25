@@ -17,7 +17,6 @@ public class RoleDAO implements RoleDAOInterface{
 
         //use a try-with-resources block to open our connection and host our DB communication
         try(Connection conn = ConnectionUtil.getConnection()){
-
             /*
              We need a String that lays out the sql query we intend to run on the DB
              This String has a wildcard/parameter/variable for the role_id
@@ -57,7 +56,6 @@ public class RoleDAO implements RoleDAOInterface{
             e.printStackTrace(); //if something goes wrong, this will display an error message
             //VERY important for debugging, so we know what went wrong and where
         }
-
         return null; //null will get returned if something goes wrong
     }
 }

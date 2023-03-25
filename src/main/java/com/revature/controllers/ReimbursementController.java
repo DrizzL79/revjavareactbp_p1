@@ -11,8 +11,7 @@ import java.util.ArrayList;
 public class ReimbursementController {
 
     ReimbursementDAO
-            reDAO =
-            new ReimbursementDAO();
+            reDAO = new ReimbursementDAO();
 
     public Handler getPendingReimbursementsHandler = (ctx) -> {
 
@@ -90,6 +89,5 @@ public class ReimbursementController {
             ctx.status(401);
             ctx.result("You must be logged in to do this.");
         }
-
     };
 }//end of class

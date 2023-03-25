@@ -5,8 +5,6 @@ public class Role {
     private int role_id;
     private String role_title;
 
-    //boilerplate code------- right click -> generate -> choose the one the want
-
     //no args
     public Role() {
     }
@@ -26,7 +24,6 @@ public class Role {
     public int getRole_id() {
         return role_id;
     }
-
     public void setRole_id(int role_id) {
         this.role_id = role_id;
     }
@@ -34,11 +31,9 @@ public class Role {
     public String getRole_title() {
         return role_title;
     }
-
     public void setRole_title(String role_title) {
         this.role_title = role_title;
     }
-
 
     @Override
     public String toString() {

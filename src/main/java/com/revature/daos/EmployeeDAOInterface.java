@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 //check RoleDAOInterface to review why we make Interfaces in JDBC
 public interface EmployeeDAOInterface {
-
     //here, we'll lay out a bunch of functionalities that EmployeeDAO will implement
-
     //A method to select all employees
     ArrayList<Employee> getEmployees();
     /*Why ArrayList? Get all will return multiple employees.

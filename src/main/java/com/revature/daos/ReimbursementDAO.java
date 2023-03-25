@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ReimbursementDAO implements ReimbursementDAOInterface{
+
     @Override
     public Reimbursement submitReimbursement(Reimbursement ticket) {
 
@@ -28,11 +29,9 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
 
             return ticket;
 
-
         } catch (SQLException e){
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -53,7 +52,6 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
         } catch (SQLException e){
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -78,7 +76,7 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
                        null
                );
 
-                ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
+               ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
                 ReimbursementStatus rStatus =
                         rsDAO.getReimbursementStatusbyID(rs.getInt("reimb_status_id_fk"));
                 r.setReimb_status(rStatus);
@@ -90,7 +88,6 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -122,7 +119,6 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
                 r.setReimb_status(rStatus);
                 reimbursements.add(r);
             }
-
             return reimbursements;
 
             } catch (SQLException e) {
