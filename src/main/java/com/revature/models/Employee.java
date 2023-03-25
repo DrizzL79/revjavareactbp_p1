@@ -68,6 +68,10 @@ public class Employee {
         this.role_id_fk = role_id_fk;
     }
 
+    public Employee(String user_name) {
+        this.user_name = user_name;
+    }
+
     public int getRole_id_fk() {
         return role_id_fk;
     }

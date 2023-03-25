@@ -15,8 +15,8 @@ public class Reimbursement {
                          String reimb_description,
                          //int reimb_type_id_fk,
                          int reimb_status_id_fk,
-                         String user_name_fk,
-                         ReimbursementStatus reimb_status
+                         String user_name_fk
+                         //ReimbursementStatus reimb_status
                          ) {
                             this.reimb_id = reimb_id;
                             this.reimb_amount = reimb_amount;
@@ -24,7 +24,7 @@ public class Reimbursement {
                          // this.reimb_type_id_fk = reimb_type_id_fk;
                             this.reimb_status_id_fk = reimb_status_id_fk;
                             this.user_name_fk = user_name_fk;
-                            this.reimb_status = reimb_status;
+                          //  this.reimb_status = reimb_status;
                         }
 
     public Reimbursement(int reimb_status_id_fk, int reimb_id) {

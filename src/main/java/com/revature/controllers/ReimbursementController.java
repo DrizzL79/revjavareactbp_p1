@@ -3,6 +3,7 @@ package com.revature.controllers;
 import com.google.gson.Gson;
 import com.revature.daos.ReimbursementDAO;
 import com.revature.daos.RoleDAO;
+import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 import io.javalin.http.Handler;
 
@@ -21,7 +22,7 @@ public class ReimbursementController {
                 ctx.result("You are not authorized to do this!");
                 ctx.status(401);
             } else {
-                ArrayList<Reimbursement> reimbursements = reDAO.getReimbursementsByStatus("Pending");
+                ArrayList<Reimbursement> reimbursements = reDAO.getReimbursementsByStatus(1);
                 Gson gson = new Gson();
                 String JSONPendReimb = gson.toJson(reimbursements);
                 ctx.result(JSONPendReimb);
@@ -83,6 +84,31 @@ public class ReimbursementController {
                 } else {
                     ctx.status(401);
                     ctx.result("Update Failed!");
+                }
+            }
+        } else {
+            ctx.status(401);
+            ctx.result("You must be logged in to do this.");
+        }
+    };
+
+    public Handler getReimbursementsMgmtHandler = (ctx) -> {
+        if (AuthController.ses != null) {
+            int roleID = (Integer) AuthController.ses.getAttribute("role_id");
+            if (roleID != 1) {
+                ctx.result("You are not authorized to do this!");
+                ctx.status(401);
+            } else {
+                String body = ctx.body();
+                Gson gson = new Gson();
+                ArrayList<Reimbursement> reimbursements = reDAO.getAllReimbursementsMgmt();
+                String JSONEmployees = gson.toJson(reimbursements);
+                if (reDAO.getAllReimbursementsMgmt()!=null) {
+                    ctx.status(201);
+                    ctx.result(JSONEmployees);
+                } else {
+                    ctx.status(401);
+                    ctx.result("Operation Failed!");
                 }
             }
         } else {

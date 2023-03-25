@@ -10,15 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ReimbursementDAO implements ReimbursementDAOInterface{
+public class ReimbursementDAO implements ReimbursementDAOInterface {
 
     @Override
     public Reimbursement submitReimbursement(Reimbursement ticket) {
 
-        try (Connection conn = ConnectionUtil.getConnection()){
+        try (Connection conn = ConnectionUtil.getConnection()) {
 
             String sql = "insert into reimbursement (reimb_amount, reimb_description," +
-                    " user_name_fk, reimb_status_id_fk) values (?, ?, ?, 1);";
+                            " user_name_fk, reimb_status_id_fk) values (?, ?, ?, 1);";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, ticket.getReimb_amount());
@@ -29,7 +29,7 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
 
             return ticket;
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -38,7 +38,7 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
     @Override
     public boolean updateReimbursementStatus(Reimbursement reimbursement) {
 
-        try(Connection conn = ConnectionUtil.getConnection()){
+        try (Connection conn = ConnectionUtil.getConnection()) {
 
             String sql = "update reimbursement set reimb_status_id_fk = ? where reimb_id = ?;";
 
@@ -49,7 +49,7 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
 
             return true;
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -60,28 +60,27 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
 
         try (Connection conn = ConnectionUtil.getConnection()) {
 
-            String  sql = "select * from reimbursement where user_name_fk =?;";
+            String sql = "select * from reimbursement where user_name_fk =?;";
 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user_name_fk);
             ResultSet rs = ps.executeQuery();
-            ArrayList<Reimbursement>  reimbursements = new ArrayList<>();
-            while (rs.next()){
-               Reimbursement r = new Reimbursement(
-                       rs.getInt("reimb_id"),
-                       rs.getDouble("reimb_amount"),
-                       rs.getString("reimb_description"),
-                       rs.getInt("reimb_status_id_fk"),
-                       rs.getString("user_name_fk"),
-                       null
-               );
+            ArrayList<Reimbursement> reimbursements = new ArrayList<>();
+            while (rs.next()) {
+                Reimbursement
+                        r = new Reimbursement(
+                                rs.getInt("reimb_id"),
+                                rs.getDouble("reimb_amount"),
+                                rs.getString("reimb_description"),
+                                rs.getInt("reimb_status_id_fk"),
+                                rs.getString("user_name_fk")
+                        );
 
-               ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
-                ReimbursementStatus rStatus =
-                        rsDAO.getReimbursementStatusbyID(rs.getInt("reimb_status_id_fk"));
-                r.setReimb_status(rStatus);
+              //  ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
+              //  ReimbursementStatus rStatus = rsDAO.getReimbursementStatusbyID(rs.getInt("reimb_status_id_fk"));
+               // r.setReimb_status(rStatus);
 
-               reimbursements.add(r);
+                reimbursements.add(r);
             }
             return reimbursements;
 
@@ -92,37 +91,69 @@ public class ReimbursementDAO implements ReimbursementDAOInterface{
     }
 
     @Override
-    public ArrayList<Reimbursement> getReimbursementsByStatus(String status) {
+    public ArrayList<Reimbursement> getReimbursementsByStatus(int status) {
 
         try (Connection conn = ConnectionUtil.getConnection()) {
 
-            String sql = "SELECT * FROM reimbursement WHERE reimb_status_id_fk = " +
-                        "(SELECT reimb_status_id FROM reimbursement_status WHERE reimb_status = ?);";
+            String
+                    sql =
+                    "SELECT * FROM reimbursement WHERE reimb_status_id_fk = ?;";
 
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, status);
+            ps.setInt(1, status);
             ResultSet rs = ps.executeQuery();
             ArrayList<Reimbursement> reimbursements = new ArrayList<>();
-            while (rs.next()){
-                Reimbursement r = new Reimbursement(
-                        rs.getInt("reimb_id"),
-                        rs.getDouble("reimb_amount"),
-                        rs.getString("reimb_description"),
-                        rs.getInt("reimb_status_id_fk"),
-                        rs.getString("user_name_fk"),
-                        null
-                );
-                ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
+            while (rs.next()) {
+                Reimbursement
+                        r = new Reimbursement(
+                                rs.getInt("reimb_id"),
+                                rs.getDouble("reimb_amount"),
+                                rs.getString("reimb_description"),
+                                rs.getInt("reimb_status_id_fk"),
+                                rs.getString("user_name_fk")
+                        );
+               /* ReimbursementStatusDAO rsDAO = new ReimbursementStatusDAO();
 
-                ReimbursementStatus rStatus =
-                        rsDAO.getReimbursementStatusbyID(rs.getInt("reimb_status_id_fk"));
-                r.setReimb_status(rStatus);
+                ReimbursementStatus rStatus = rsDAO.getReimbursementStatusbyID(
+                        rs.getInt("reimb_status_id_fk"));
+                r.setReimb_status(rStatus);*/
                 reimbursements.add(r);
             }
             return reimbursements;
 
-            } catch (SQLException e) {
-                e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Reimbursement> getAllReimbursementsMgmt() {
+
+        try (Connection conn = ConnectionUtil.getConnection()) {
+
+            String sql = "select * from reimbursement;";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Reimbursement> reimbursements = new ArrayList<>();
+            while (rs.next()) {
+                Reimbursement
+                        r =
+                        new Reimbursement(
+                                rs.getInt("reimb_id"),
+                                rs.getDouble("reimb_amount"),
+                                rs.getString("reimb_description"),
+                                rs.getInt("reimb_status_id_fk"),
+                                rs.getString("user_name_fk")
+                        );
+
+                reimbursements.add(r);
+            }
+            return reimbursements;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }

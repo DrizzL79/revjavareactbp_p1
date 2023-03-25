@@ -16,4 +16,5 @@ public interface EmployeeDAOInterface {
     Employee insertEmployee(Employee emp);
     /* if we're sending an Employee, why return one back?
     just so the User can see what they've inserted. Think of it as a confirmation. */
+    ArrayList<String> getUserNames();
 }

@@ -113,4 +113,29 @@ public class EmployeeDAO implements EmployeeDAOInterface{
         }
         return null;
     }
+
+    @Override
+    public ArrayList<String> getUserNames() {
+
+        try(Connection conn = ConnectionUtil.getConnection()){
+
+            String sql = "select user_name from users;";
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+
+            ArrayList<String> userNames = new ArrayList<>();
+
+            while(rs.next()){
+               String e = rs.getString("user_name");
+               userNames.add(e);
+            }
+
+            return userNames;
+
+        } catch(SQLException e){
+            e.printStackTrace();
+    }
+
+        return null;
+    }
 }
