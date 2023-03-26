@@ -47,5 +47,4 @@ public class Launcher {
         app.post("/login", ac.loginHandler);
         app.get("/reimbursements/",rc.getReimbursementsMgmtHandler);
     }
-
 }

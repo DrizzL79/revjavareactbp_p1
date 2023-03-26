@@ -18,7 +18,7 @@
     <!--We will put all of our dependencies within the dependencies tags-->
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-        <!-- -->
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -31,14 +31,12 @@
             <version>1.7.31</version>
         </dependency>
 
-        <!--Javalin dependency -->
         <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
             <version>5.2.0</version>
         </dependency>
 
-        <!--GSON dependency -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
